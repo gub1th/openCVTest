@@ -26,8 +26,16 @@ while True:
         lEyeCenterTop = getMidpoint(landmarks.part(37), landmarks.part(38))
         lEyeCenterBot = getMidpoint(landmarks.part(41), landmarks.part(40))
 
+        lEyeCenterTopX, lEyeCenterTopY = lEyeCenterTop
+        lEyeCenterBotX, lEyeCenterBotY = lEyeCenterBot
+
+        centerEyeX = landmarks.part(36).x + (landmarks.part(39).x - landmarks.part(36).x)//2
+        centerEyeY = lEyeCenterTopY + (lEyeCenterBotY - lEyeCenterTopY)//2
+
         lEyeHorizontal = cv2.line(frame, lEyeLeft, lEyeRight, (255, 0, 0), 2)
         lEyeVertical = cv2.line(frame, lEyeCenterTop, lEyeCenterBot, (255, 0, 0), 2)
+
+        lEyeCenter = cv2.circle(frame, (centerEyeX, centerEyeY), 5, (0, 0, 255), 2)
 
     cv2.imshow('frame', frame)
 
